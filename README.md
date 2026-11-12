@@ -1,107 +1,237 @@
 # OpenSeed
 
-OpenSeed is an open-source web application designed to help developers find "good first issues" on GitHub, making it easy to start contributing to open source projects.
+[![Angular](https://img.shields.io/badge/Angular-17%2B-DD0031?logo=angular&logoColor=white)](https://angular.dev/)
+[![Node.js](https://img.shields.io/badge/Node.js-18%2B-339933?logo=nodedotjs&logoColor=white)](https://nodejs.org/)
+[![Apache-2.0](https://img.shields.io/badge/Licencia-Apache--2.0-blue)](LICENSE)
 
-<img width="1902" height="940" alt="image" src="https://github.com/user-attachments/assets/fe033526-5443-4419-9321-a1ae31e29332" />
+[Español](#español) · [English](#english)
 
-## Live Demo
-Check out the live app: [OpenSeed](https://openseed.web.app/)
+---
 
-## Featured on ProductHunt
-Check out : [OpenSeed](https://www.producthunt.com/products/openseed)
+## Español
 
-<a href="https://www.buymeacoffee.com/growcodecoding" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: 41px !important;width: 174px !important;box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;" ></a>
+### Índice
 
-## Features
-  - Discover Good First Issues: Find beginner-friendly GitHub issues to contribute to.
-  - Filter by Programming Language: Narrow down issues by specific coding languages.
-  - Category Browsing: Explore issues based on development areas like Web, Mobile, Machine Learning, etc.
-  - Repository/Title Filter: Narrow down issues by specific repository names, labels or issue titles.
-  - Bookmark for Later: Save issues in local storage for easy access later.
-  - Dark/Light Mode Toggle: Switch between themes for comfortable browsing.
-  - Multi language support
+- [Descripción](#descripción)
+- [Demo](#demo)
+- [Características](#características)
+- [Stack tecnológico](#stack-tecnológico)
+- [Estructura del proyecto](#estructura-del-proyecto)
+- [Requisitos](#requisitos)
+- [Instalación](#instalación)
+- [Uso](#uso)
+- [Créditos](#créditos)
+- [Licencia](#licencia)
 
-## Tech Stack
-  - **Frontend**: Angular, Typescript, Material UI, HTML, CSS
-  - **Backend**: Node.js
-  - **API**: GitHub API for issue data
-  - ![Angular](https://img.shields.io/badge/angular-%23DD0031.svg?style=for-the-badge&logo=angular&logoColor=white) ![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white) ![MUI](https://img.shields.io/badge/MUI-%230081CB.svg?style=for-the-badge&logo=mui&logoColor=white)
- ![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white) ![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white) ![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white) ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E) ![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB)
+### Descripción
 
-## Getting Started
-### Prerequisites
-  - Node.js (v14 or later)
-  - npm or yarn
+**OpenSeed** ayuda a encontrar *good first issues* en GitHub para dar el salto a contribuir en proyectos de código abierto. Filtra por lenguaje, categoría, licencia, propietario, estrellas, etiqueta o repositorio, y guarda los issues que te interesan para luego.
 
-## Installation
-Clone the Repository:
+> Este repositorio es un **fork** del proyecto original de [Akhil P Vijayan](https://github.com/akhilpvijayan/openseed), publicado bajo Apache-2.0.
 
-```bash
-git clone https://github.com/akhilpvijayan/openseed.git
+### Demo
+
+- **Aplicación:** <https://openseed.web.app/>
+- **Ficha en Product Hunt:** <https://www.producthunt.com/products/openseed>
+
+### Características
+
+- **Descubrir issues para principiantes** consultando la API de GitHub.
+- **Filtros combinables**: lenguaje, categoría (web, móvil, machine learning…), licencia, propietario, forks, estrellas, etiqueta y repositorio.
+- **Marcadores** guardados en `localStorage` para volver más tarde.
+- **Tema claro y oscuro**.
+- **Interfaz multiidioma**.
+- **Servidor propio** que firma las peticiones a GitHub con un token, evitando los límites del cliente.
+
+### Stack tecnológico
+
+| Capa | Tecnología |
+|---|---|
+| Frontend | Angular, TypeScript, Angular Material, SCSS |
+| Backend | Node.js + Express (`openseed-server`) |
+| Datos | GitHub REST API |
+| Despliegue | Firebase Hosting (cliente) y Vercel (servidor) |
+
+### Estructura del proyecto
+
+```text
+Openseed/
+├── openseed-client/          # Aplicación Angular
+│   ├── src/app/              # Componentes, servicios y modelos
+│   ├── src/environments/     # URL del backend
+│   └── package.json
+├── openseed-server/          # API intermedia en Node.js
+│   ├── api/github.js         # Llamadas a la GitHub API
+│   ├── server.js
+│   └── vercel.json
+├── LICENSE                   # Apache-2.0
+└── README.md
 ```
-Install Dependencies for both client and server:
-Navigate to Project Directory:
+
+### Requisitos
+
+- **Node.js 18 o superior** y npm.
+- Un **token de GitHub** con permisos de lectura pública (sin scopes especiales).
+
+### Instalación
 
 ```bash
-cd openseed/openseed-server
-```
-```bash
+git clone https://github.com/alberto2005-coder/Openseed.git
+cd Openseed/openseed-server
 npm install
 ```
 
+Crea un `.env` en `openseed-server`:
+
 ```bash
-cd openseed/openseed-client
+GITHUB_TOKEN=tu_token_de_github
+GITHUB_API_URL=https://api.github.com
 ```
+
+Después, el cliente:
+
 ```bash
+cd ../openseed-client
 npm install
 ```
-Add GitHub API Url and Github Token:
-Create a .env file in the root of openseed-server and add your GitHub API Url and Github Token:
+
+Ajusta la URL del backend en `src/environments/environment.ts` si no usas `http://localhost:3000`.
+
+### Uso
 
 ```bash
-GITHUB_TOKEN=your_github_token_here
-GITHUB_API_URL=your_github_url_key_here
+# terminal 1
+cd openseed-server && node server.js
+
+# terminal 2
+cd openseed-client && ng serve
 ```
-Change server url inside environment.ts file in openseed-client
-Run the Development Server:
+
+Abre <http://localhost:4200>.
+
+- **Filtrar**: usa la barra lateral para acotar por lenguaje, categoría, licencia, propietario, forks, estrellas, etiqueta o repositorio.
+- **Guardar**: marca issues para revisarlos luego.
+- **Tema e idioma**: los conmutadores están en la esquina superior.
+
+### Créditos
+
+Proyecto original de **Akhil P Vijayan** y colaboradores. Este fork conserva su licencia y su estructura; los cambios propios se limitan a documentación y ajustes menores.
+
+### Licencia
+
+**Apache-2.0**, la misma del proyecto original: consulta [LICENSE](LICENSE). Permite uso comercial y modificaciones siempre que se conserve el aviso de copyright y se indique qué cambió.
+
+---
+
+## English
+
+### Table of contents
+
+- [Overview](#overview)
+- [Demo](#demo)
+- [Features](#features)
+- [Tech stack](#tech-stack)
+- [Project structure](#project-structure)
+- [Requirements](#requirements)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Credits](#credits)
+- [License](#license)
+
+### Overview
+
+**OpenSeed** helps you find *good first issues* on GitHub so you can start contributing to open source. Filter by language, category, license, owner, stars, label or repository, and bookmark the issues you want to come back to.
+
+> This repository is a **fork** of the original project by [Akhil P Vijayan](https://github.com/akhilpvijayan/openseed), released under Apache-2.0.
+
+### Demo
+
+- **App:** <https://openseed.web.app/>
+- **Product Hunt page:** <https://www.producthunt.com/products/openseed>
+
+### Features
+
+- **Beginner-friendly issue discovery** powered by the GitHub API.
+- **Combinable filters**: language, category (web, mobile, machine learning…), license, owner, forks, stars, label and repository.
+- **Bookmarks** stored in `localStorage`.
+- **Light and dark themes**.
+- **Multi-language interface**.
+- **Own backend** that signs GitHub requests with a token, sidestepping client-side rate limits.
+
+### Tech stack
+
+| Layer | Technology |
+|---|---|
+| Frontend | Angular, TypeScript, Angular Material, SCSS |
+| Backend | Node.js + Express (`openseed-server`) |
+| Data | GitHub REST API |
+| Deployment | Firebase Hosting (client) and Vercel (server) |
+
+### Project structure
+
+```text
+Openseed/
+├── openseed-client/          # Angular app
+│   ├── src/app/              # Components, services and models
+│   ├── src/environments/     # Backend URL
+│   └── package.json
+├── openseed-server/          # Node.js middleware API
+│   ├── api/github.js         # GitHub API calls
+│   ├── server.js
+│   └── vercel.json
+├── LICENSE                   # Apache-2.0
+└── README.md
+```
+
+### Requirements
+
+- **Node.js 18 or later** and npm.
+- A **GitHub token** with public read access (no special scopes).
+
+### Installation
 
 ```bash
-node server.js
+git clone https://github.com/alberto2005-coder/Openseed.git
+cd Openseed/openseed-server
+npm install
 ```
+
+Create a `.env` inside `openseed-server`:
+
 ```bash
-ng serve
+GITHUB_TOKEN=your_github_token
+GITHUB_API_URL=https://api.github.com
 ```
-Open the App:
-```Go to http://localhost:4200``` in your browser.
 
-## Usage
-  - Filter Issues: Use the sidebar to filter issues by language, category, license, owner,fork, stars, label or repository.
-  - Bookmark Issues: Save interesting issues for future contributions.
-  - Toggle Themes: Switch between light and dark modes using the toggle in the top right corner.
-  - Languages: Switch between multiple languages using the toggle in the top left corner.
+Then the client:
 
-## Contributing
-Contributions are welcome! Please follow these steps:
-
-Fork the Repository
-Create a New Branch:
 ```bash
-git checkout -b feature/your-feature-name
+cd ../openseed-client
+npm install
 ```
-Commit Your Changes:
+
+Point `src/environments/environment.ts` at your backend if it is not `http://localhost:3000`.
+
+### Usage
+
 ```bash
-git commit -m 'Add some feature'
+# terminal 1
+cd openseed-server && node server.js
+
+# terminal 2
+cd openseed-client && ng serve
 ```
-Push to the Branch:
-```bash
-git push origin feature/your-feature-name
-```
-Open a Pull Request
 
-## License
-This project is licensed under the Apache-2.0 License - see the LICENSE file for details.
+Open <http://localhost:4200>.
 
-[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+- **Filter**: use the sidebar to narrow by language, category, license, owner, forks, stars, label or repository.
+- **Bookmark**: save issues to review later.
+- **Theme and language**: both toggles sit in the top corner.
 
-## Acknowledgments
-Special thanks to all the open-source projects and the GitHub API for making OpenSeed possible.
+### Credits
+
+Original project by **Akhil P Vijayan** and contributors. This fork keeps its license and structure; its own changes are limited to documentation and minor adjustments.
+
+### License
+
+**Apache-2.0**, the same as the original project: see [LICENSE](LICENSE). It allows commercial use and modifications as long as the copyright notice is preserved and changes are stated.
